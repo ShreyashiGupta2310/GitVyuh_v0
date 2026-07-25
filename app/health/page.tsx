@@ -1,12 +1,15 @@
+import { GetRepoInfo } from "@/lib/github";
+
 export default async function HealthPage() {
-  const response = await fetch("https://api.github.com/users/octocat");
-  const data = await response.json();
+  const data = await GetRepoInfo("ShreyashiGupta2310", "GitVyuh_v0");
 
   return (
     <div>
+      
       <h1>Health Check</h1>
-      <p>Fetched user: {data.login}</p>
-      <p>Public repos: {data.public_repos}</p>
+      <p>Repo name: {data.name}</p>
+      <p>Stars: {data.stargazers_count}</p>
+      <p>Description: {data.description}</p>
     </div>
   );
 }
