@@ -43,3 +43,42 @@ export async function GetCommitByDate(commits : any[]) {
     return Object.entries(count).map(([date, count]) => ({ date, count }));
 
 }
+
+export async function GetFolderStructure(owner:string, repo:string) {
+    const response = await fetch(
+        //`https://api.github.com/repos/${owner}/${repo}/contents`
+        `https://api.github.com/repos/${owner}/${repo}/git/trees/main?recursive=1`,{
+        headers: {
+            'Authorization': `Bearer ${process.env.GITHUB_TOKEN}`
+        },
+    });
+    const data = await response.json();
+    return data.tree;
+}
+
+// Logic is in project copy (I described on paper how to come up with this logic)
+export function buildFolderTree(flatList: any[]) {
+    const root: any = { name: "root", type: "folder", children: [] };
+  
+    for (const item of flatList) {
+      const parts = item.path.split("/");
+      let current = root;
+  
+      for (const part of parts) {
+        let existing = current.children.find((child: any) => child.name === part);
+  
+        if (!existing) {
+          existing = {
+            name: part,
+            type: item.type === "blob" && part === parts[parts.length - 1] ? "file" : "folder",
+            children: [],
+          };
+          current.children.push(existing);
+        }
+  
+        current = existing;
+      }
+    }
+  
+    return root;
+  }
