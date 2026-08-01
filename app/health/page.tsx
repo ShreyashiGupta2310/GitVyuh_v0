@@ -4,6 +4,11 @@ import { GetRepoCommits } from "@/lib/github";
 import { GetCommitByDate } from "@/lib/github";
 import {GetFolderStructure} from "@/lib/github";
 import { buildFolderTree } from "@/lib/github";
+import { generateText } from "@/lib/ai";
+
+
+
+
 
 export default async function HealthPage() {
   // const data = await GetRepoInfo("ShreyashiGupta2310", "GitVyuh_v0");
@@ -62,15 +67,15 @@ export default async function HealthPage() {
   //flat-list
 
 
-    const flatList = await GetFolderStructure("ShreyashiGupta2310", "GitVyuh_v0");
-    const tree = buildFolderTree(flatList);
+    // const flatList = await GetFolderStructure("ShreyashiGupta2310", "GitVyuh_v0");
+    // const tree = buildFolderTree(flatList);
   
-    return (
-      <div>
-        <h1>Health Check</h1>
-        <pre>{JSON.stringify(tree, null, 2)}</pre>
-      </div>
-    );
+    // return (
+    //   <div>
+    //     <h1>Health Check</h1>
+    //     <pre>{JSON.stringify(tree, null, 2)}</pre>
+    //   </div>
+    // );
 
   //   const flatList = await GetFolderStructure("ShreyashiGupta2310", "GitVyuh_v0");
 
@@ -80,4 +85,16 @@ export default async function HealthPage() {
   //     <pre>{JSON.stringify(flatList, null, 2)}</pre>
   //   </div>
   // );
+
+
+
+
+  //checking the ai
+  const text = await generateText("Hello, how are you?");
+  return (
+    <div>
+      <h1>Health Check</h1>
+      <p>{text}</p>
+    </div>
+  );
   }
