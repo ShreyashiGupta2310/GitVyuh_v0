@@ -4,13 +4,13 @@ import { GetRepoCommits } from "@/lib/github";
 import { GetCommitByDate } from "@/lib/github";
 import {GetFolderStructure} from "@/lib/github";
 import { buildFolderTree } from "@/lib/github";
-import { generateText } from "@/lib/ai";
+import { analyzeRepo, } from "@/lib/ai";
 
 
 
 
 
-export default async function HealthPage() {
+// export default async function HealthPage() {
   // const data = await GetRepoInfo("ShreyashiGupta2310", "GitVyuh_v0");
 
   // return (
@@ -90,11 +90,36 @@ export default async function HealthPage() {
 
 
   //checking the ai
-  const text = await generateText("Hello, how are you?");
-  return (
-    <div>
-      <h1>Health Check</h1>
-      <p>{text}</p>
-    </div>
-  );
+  // const text = await generateText("Hello, how are you?");
+  // return (
+  //   <div>
+  //     <h1>Health Check</h1>
+  //     <p>{text}</p>
+  //   </div>
+  // );
+  // }
+
+
+
+  export default async function HealthPage() {
+    const repoInfo = await GetRepoInfo("ShreyashiGupta2310", "GitVyuh_v0");
+    const readme = await GetRepoReadme("ShreyashiGupta2310", "GitVyuh_v0");
+    const commits = await GetRepoCommits("ShreyashiGupta2310", "GitVyuh_v0");
+    const groupedCommits = GetCommitByDate(commits);
+    const flatTree = await GetFolderStructure("ShreyashiGupta2310", "GitVyuh_v0");
+    const folderTree = buildFolderTree(flatTree);
+  
+    const analysis = await analyzeRepo({
+      repoInfo,
+      readme,
+      commits: groupedCommits,
+      folderTree,
+    });
+  
+    return (
+      <div>
+        <h1>Health Check</h1>
+        <pre>{JSON.stringify(analysis, null, 2)}</pre>
+      </div>
+    );
   }

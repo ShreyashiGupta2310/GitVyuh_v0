@@ -5,7 +5,7 @@ export interface ScoreCardData {
 }
 export interface ReadMEcardData {
 
-    Feedback: string;
+    feedback: string;
     missingSections: string[];
   
 }

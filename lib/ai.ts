@@ -10,3 +10,40 @@ export async function generateText(prompt: string) {
 }   
 
 
+export function buildPrompt(repoData: any) {
+    return `
+  You are analyzing a GitHub repository's quality. Based on the data below, decide which of these 6 components are relevant, and respond with ONLY a JSON array — no other text, no markdown code fences.
+  
+  Each item in the array must have this shape:
+  { "component": "ComponentName", "data": { ... } }
+  
+  Available components and their exact "data" shapes:
+  
+  1. ScoreCardData: { "score": number, "verdict": string }
+  2. ReadMEcardData: { "feedback": string, "missingSections": string[] }
+  3. CommitChartData: { "commits": [{ "date": string, "count": number }] }
+  4. FolderTreeData: { "root": { "name": string, "type": "file" | "folder", "children": [...] }, "organizationRating": string }
+  5. TechStackBadgesData: { "languages": string[] }
+  6. ErrorStateData: { "reason": "private" | "empty" | "rate-limited" | "invalid", "message": string }
+  
+  Only include components that make sense given the actual data. For example, skip CommitChart if there are fewer than 3 commits total.
+  
+  Repo data:
+  ${JSON.stringify(repoData, null, 2)}
+  
+  Respond with ONLY the JSON array, nothing else.
+  `;
+  }
+
+  export async function analyzeRepo(repoData: any) {
+    const model = genAI.getGenerativeModel({ model: "gemini-3.6-flash" });
+  
+    const prompt = buildPrompt(repoData);
+    const result = await model.generateContent(prompt);
+    const text = result.response.text();
+  
+    const cleaned = text.replace(/```json|```/g, "").trim();
+    const parsed = JSON.parse(cleaned);
+  
+    return parsed;
+}
