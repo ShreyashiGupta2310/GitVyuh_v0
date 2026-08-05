@@ -19,12 +19,12 @@ export function buildPrompt(repoData: any) {
   
   Available components and their exact "data" shapes:
   
-  1. ScoreCardData: { "score": number, "verdict": string }
-  2. ReadMEcardData: { "feedback": string, "missingSections": string[] }
-  3. CommitChartData: { "commits": [{ "date": string, "count": number }] }
-  4. FolderTreeData: { "root": { "name": string, "type": "file" | "folder", "children": [...] }, "organizationRating": string }
-  5. TechStackBadgesData: { "languages": string[] }
-  6. ErrorStateData: { "reason": "private" | "empty" | "rate-limited" | "invalid", "message": string }
+  1. ScoreCard: { "score": number, "verdict": string }
+  2. ReadmeCard: { "feedback": string, "missingSections": string[] }
+  3. CommitChart: { "commits": [{ "date": string, "count": number }] }
+  4. FolderTree: { "root": { "name": string, "type": "file" | "folder", "children": [...] }, "organizationRating": string }
+  5. TechStackBadges: { "languages": string[] }
+  6. ErrorState: { "reason": "private" | "empty" | "rate-limited" | "invalid", "message": string }
   
   Only include components that make sense given the actual data. For example, skip CommitChart if there are fewer than 3 commits total.
   
@@ -43,7 +43,21 @@ export function buildPrompt(repoData: any) {
     const text = result.response.text();
   
     const cleaned = text.replace(/```json|```/g, "").trim();
-    const parsed = JSON.parse(cleaned);
+   // const cleaned = "this is not valid json{{{";
+
+    try {
+      const parsed = JSON.parse(cleaned);
+      return parsed;
+    } catch (error) {
+      return [
+        {
+          component: "ErrorState",
+          data: {
+            reason: "invalid",
+            message: "The AI analysis could not be completed. Please try again.",
+          },
+        },
+      ];
+    }
   
-    return parsed;
 }
