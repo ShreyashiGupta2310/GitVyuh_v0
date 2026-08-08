@@ -5,9 +5,9 @@ import { GetCommitByDate } from "@/lib/github";
 import {GetFolderStructure} from "@/lib/github";
 import { buildFolderTree } from "@/lib/github";
 import { analyzeRepo, } from "@/lib/ai";
-
-
-
+import TechStackBadges from "@/components/TechStackBadges";
+import ScoreCard from "@/components/ScoreCard";
+import ReadmeCard from "@/components/ReadmeCard";
 
 
 // export default async function HealthPage() {
@@ -101,25 +101,75 @@ import { analyzeRepo, } from "@/lib/ai";
 
 
 
-  export default async function HealthPage() {
-    const repoInfo = await GetRepoInfo("ShreyashiGupta2310", "GitVyuh_v0");
-    const readme = await GetRepoReadme("ShreyashiGupta2310", "GitVyuh_v0");
-    const commits = await GetRepoCommits("ShreyashiGupta2310", "GitVyuh_v0");
-    const groupedCommits = GetCommitByDate(commits);
-    const flatTree = await GetFolderStructure("ShreyashiGupta2310", "GitVyuh_v0");
-    const folderTree = buildFolderTree(flatTree);
+  // export default async function HealthPage() {
+  //   const repoInfo = await GetRepoInfo("ShreyashiGupta2310", "GitVyuh_v0");
+  //   const readme = await GetRepoReadme("ShreyashiGupta2310", "GitVyuh_v0");
+  //   const commits = await GetRepoCommits("ShreyashiGupta2310", "GitVyuh_v0");
+  //   const groupedCommits = GetCommitByDate(commits);
+  //   const flatTree = await GetFolderStructure("ShreyashiGupta2310", "GitVyuh_v0");
+  //   const folderTree = buildFolderTree(flatTree);
   
-    const analysis = await analyzeRepo({
-      repoInfo,
-      readme,
-      commits: groupedCommits,
-      folderTree,
-    });
+  //   const analysis = await analyzeRepo({
+  //     repoInfo,
+  //     readme,
+  //     commits: groupedCommits,
+  //     folderTree,
+  //   });
+  
+  //   return (
+  //     <div>
+  //       <h1>Health Check</h1>
+  //       <pre>{JSON.stringify(analysis, null, 2)}</pre>
+  //     </div>
+  //   );
+  // }
+
+
+  // testing the tech stack badges
+
+  // export default function HealthPage() {
+  //   const fakeData = {
+  //     languages: ["TypeScript", "JavaScript", "CSS"],
+  //   };
+  
+  //   return (
+  //     <div>
+  //       <h1>Health Check</h1>
+  //       <TechStackBadges data={fakeData} />
+  //     </div>
+  //   );
+  // }
+
+
+
+  // testing the score card
+  // export default function HealthPage() {
+  //   const fakeData = {
+  //     score: 25,
+  //     verdict: "Well-organized repository with clear documentation.",
+  //   };
+  
+  //   return (
+  //     <div>
+  //       <h1>Health Check</h1>
+  //       <ScoreCard data={fakeData} />
+  //     </div>
+  //   );
+  // }
+
+  // testing the readme card
+  export default function HealthPage() {
+    const fakeData = {
+      feedback: "The README is minimal and could use more detail.",
+      missingSections: [],
+    };
   
     return (
       <div>
         <h1>Health Check</h1>
-        <pre>{JSON.stringify(analysis, null, 2)}</pre>
+        <ReadmeCard data={fakeData} />
       </div>
     );
   }
+  
+  
