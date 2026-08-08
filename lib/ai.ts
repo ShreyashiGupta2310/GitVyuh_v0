@@ -36,6 +36,7 @@ export function buildPrompt(repoData: any) {
   }
 
   export async function analyzeRepo(repoData: any) {
+    try{
     const model = genAI.getGenerativeModel({ model: "gemini-3.6-flash" });
   
     const prompt = buildPrompt(repoData);
@@ -45,7 +46,7 @@ export function buildPrompt(repoData: any) {
     const cleaned = text.replace(/```json|```/g, "").trim();
    // const cleaned = "this is not valid json{{{";
 
-    try {
+    
       const parsed = JSON.parse(cleaned);
       return parsed;
     } catch (error) {

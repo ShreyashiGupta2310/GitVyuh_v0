@@ -18,6 +18,9 @@ export async function GetRepoReadme(owner:string, repo:string) {
      
     });
     const data = await response.json();
+    if(!data.content) {
+        return "No README file found in this repository.";
+    }
     const decodedContent = Buffer.from(data.content, "base64").toString("utf-8");
   
     return decodedContent;

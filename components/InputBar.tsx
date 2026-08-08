@@ -14,10 +14,20 @@ export default function InputBar() {
     const owner = parts[0];
     const repo = parts[1];
 
-    const response = await fetch(`/api/github?owner=${owner}&repo=${repo}`);
-    const data = await response.json();
+    const GitHubresponse = await fetch(`/api/github?owner=${owner}&repo=${repo}`);
+    const GitHubdata = await GitHubresponse.json();
 
-    setResult(data);
+    const analyzeResponse = await fetch(`/api/analyze`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(GitHubdata),
+    });
+    const analyzeData = await analyzeResponse.json();
+
+    setResult(analyzeData);
+  
     setLoading(false);
   }
 
