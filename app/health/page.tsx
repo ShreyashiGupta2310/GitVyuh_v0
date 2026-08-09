@@ -9,7 +9,8 @@ import TechStackBadges from "@/components/TechStackBadges";
 import ScoreCard from "@/components/ScoreCard";
 import ReadmeCard from "@/components/ReadmeCard";
 import ErrorState from "@/components/ErrorState";
-
+import FolderTree from "@/components/FolderTree";
+import CommitChart from "@/components/CommitChart";
 
 // export default async function HealthPage() {
   // const data = await GetRepoInfo("ShreyashiGupta2310", "GitVyuh_v0");
@@ -175,34 +176,80 @@ import ErrorState from "@/components/ErrorState";
   // }
   
   //testing error state
-  export default function HealthPage() {
-    const fakeDataPrivate = {
-      reason: "private" as const,
-      message: "This repository is private. Please make it public to analyze it.",
-    };
+  // export default function HealthPage() {
+  //   const fakeDataPrivate = {
+  //     reason: "private" as const,
+  //     message: "This repository is private. Please make it public to analyze it.",
+  //   };
   
-    const fakeDataEmpty = {
-      reason: "empty" as const,
-      message: "This repository has no files to analyze.",
-    };
+  //   const fakeDataEmpty = {
+  //     reason: "empty" as const,
+  //     message: "This repository has no files to analyze.",
+  //   };
   
-    const fakeDataRateLimited = {
-      reason: "rate-limited" as const,
-      message: "GitHub API rate limit reached. Please try again later.",
-    };
+  //   const fakeDataRateLimited = {
+  //     reason: "rate-limited" as const,
+  //     message: "GitHub API rate limit reached. Please try again later.",
+  //   };
   
-    const fakeDataInvalid = {
-      reason: "invalid" as const,
-      message: "This doesn't appear to be a valid GitHub repository URL.",
-    };
+  //   const fakeDataInvalid = {
+  //     reason: "invalid" as const,
+  //     message: "This doesn't appear to be a valid GitHub repository URL.",
+  //   };
   
-    return (
-      <div className="p-6 space-y-4">
-        <h1>Health Check</h1>
-        <ErrorState data={fakeDataPrivate} />
-        <ErrorState data={fakeDataEmpty} />
-        <ErrorState data={fakeDataRateLimited} />
-        <ErrorState data={fakeDataInvalid} />
-      </div>
-    );
-  }
+  //   return (
+  //     <div className="p-6 space-y-4">
+  //       <h1>Health Check</h1>
+  //       <ErrorState data={fakeDataPrivate} />
+  //       <ErrorState data={fakeDataEmpty} />
+  //       <ErrorState data={fakeDataRateLimited} />
+  //       <ErrorState data={fakeDataInvalid} />
+  //     </div>
+  //   );
+  // }
+
+  //testing folder tree fake data
+
+  // export default function HealthPage() {
+  //   const fakeData = {
+  //     root: {
+  //       name: "root",
+  //       type: "folder" as const,
+  //       children: [
+  //         { name: "app", type: "folder" as const, children: [
+  //           { name: "page.tsx", type: "file" as const, children: [] },
+  //         ]},
+  //         { name: "README.md", type: "file" as const, children: [] },
+  //       ],
+  //     },
+  //     organizationRating: "Good",
+  //   };
+  
+  //   return (
+  //     <div>
+  //       <h1>Health Check</h1>
+  //       <FolderTree data={fakeData} />
+  //     </div>
+  //   );
+  // }
+
+  //testin commit chart data(fake one) rechart(refer to docs for more info)
+  
+
+export default function HealthPage() {
+  const fakeData = {
+    commits: [
+      { date: "2026-07-20", count: 3 },
+      { date: "2026-07-21", count: 5 },
+      { date: "2026-07-22", count: 1 },
+      { date: "2026-07-23", count: 4 },
+    ],
+  };
+
+  return (
+    <div>
+      <h1>Health Check</h1>
+      <CommitChart data={fakeData} />
+    </div>
+  );
+}
