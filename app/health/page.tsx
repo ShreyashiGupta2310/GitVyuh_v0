@@ -8,6 +8,7 @@ import { analyzeRepo, } from "@/lib/ai";
 import TechStackBadges from "@/components/TechStackBadges";
 import ScoreCard from "@/components/ScoreCard";
 import ReadmeCard from "@/components/ReadmeCard";
+import ErrorState from "@/components/ErrorState";
 
 
 // export default async function HealthPage() {
@@ -158,18 +159,50 @@ import ReadmeCard from "@/components/ReadmeCard";
   // }
 
   // testing the readme card
+  // export default function HealthPage() {
+  //   const fakeData = {
+  //     feedback: "The README is minimal and could use more detail.",
+  //     missingSections: ["Installation", "Usage Examples", "License"]
+  //    // missingSections: [],
+  //   };
+  
+  //   return (
+  //     <div>
+  //       <h1>Health Check</h1>
+  //       <ReadmeCard data={fakeData} />
+  //     </div>
+  //   );
+  // }
+  
+  //testing error state
   export default function HealthPage() {
-    const fakeData = {
-      feedback: "The README is minimal and could use more detail.",
-      missingSections: [],
+    const fakeDataPrivate = {
+      reason: "private" as const,
+      message: "This repository is private. Please make it public to analyze it.",
+    };
+  
+    const fakeDataEmpty = {
+      reason: "empty" as const,
+      message: "This repository has no files to analyze.",
+    };
+  
+    const fakeDataRateLimited = {
+      reason: "rate-limited" as const,
+      message: "GitHub API rate limit reached. Please try again later.",
+    };
+  
+    const fakeDataInvalid = {
+      reason: "invalid" as const,
+      message: "This doesn't appear to be a valid GitHub repository URL.",
     };
   
     return (
-      <div>
+      <div className="p-6 space-y-4">
         <h1>Health Check</h1>
-        <ReadmeCard data={fakeData} />
+        <ErrorState data={fakeDataPrivate} />
+        <ErrorState data={fakeDataEmpty} />
+        <ErrorState data={fakeDataRateLimited} />
+        <ErrorState data={fakeDataInvalid} />
       </div>
     );
   }
-  
-  
