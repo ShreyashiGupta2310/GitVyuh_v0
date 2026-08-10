@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ComponenetRenderer from "./ComponentRenderer";
 
 export default function InputBar() {
   const [url, setUrl] = useState("");
@@ -42,7 +43,7 @@ export default function InputBar() {
       <button onClick={handleSubmit}>Analyze</button>
 
       {loading && <p>Loading...</p>}
-      {result && <pre>{JSON.stringify(result, null, 2)}</pre>}
+      {result && <ComponenetRenderer blocks={result.blocks} />}
     </div>
   );
 }
