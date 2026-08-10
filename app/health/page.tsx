@@ -11,6 +11,8 @@ import ReadmeCard from "@/components/ReadmeCard";
 import ErrorState from "@/components/ErrorState";
 import FolderTree from "@/components/FolderTree";
 import CommitChart from "@/components/CommitChart";
+import ComponentRenderer from "@/components/ComponentRenderer";
+import { ComponentBlock } from "@/types";
 
 // export default async function HealthPage() {
   // const data = await GetRepoInfo("ShreyashiGupta2310", "GitVyuh_v0");
@@ -236,20 +238,52 @@ import CommitChart from "@/components/CommitChart";
   //testin commit chart data(fake one) rechart(refer to docs for more info)
   
 
+// export default function HealthPage() {
+//   const fakeData = {
+//     commits: [
+//       { date: "2026-07-20", count: 3 },
+//       { date: "2026-07-21", count: 5 },
+//       { date: "2026-07-22", count: 1 },
+//       { date: "2026-07-23", count: 4 },
+//     ],
+//   };
+
+//   return (
+//     <div>
+//       <h1>Health Check</h1>
+//       <CommitChart data={fakeData} />
+//     </div>
+//   );
+// }
+
+
+//fake data testing for component rendering
+
+
+
 export default function HealthPage() {
-  const fakeData = {
-    commits: [
-      { date: "2026-07-20", count: 3 },
-      { date: "2026-07-21", count: 5 },
-      { date: "2026-07-22", count: 1 },
-      { date: "2026-07-23", count: 4 },
-    ],
-  };
+  const fakeBlocks: ComponentBlock[] = [
+    {
+      component: "ScoreCard",
+      data: { score: 72, verdict: "Solid structure with room for improvement." },
+    },
+    {
+      component: "TechStackBadges",
+      data: { languages: ["TypeScript", "CSS"] },
+    },
+    {
+      component: "ReadmeCard",
+      data: {
+        feedback: "README is minimal.",
+        missingSections: ["Installation", "License"],
+      },
+    },
+  ];
 
   return (
-    <div>
+    <div className="p-6">
       <h1>Health Check</h1>
-      <CommitChart data={fakeData} />
+      <ComponentRenderer blocks={fakeBlocks} />
     </div>
   );
 }
