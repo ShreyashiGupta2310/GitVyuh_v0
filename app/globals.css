@@ -8,15 +8,15 @@
   --card-bg: #FFFFFF;
   --accent-purple: #7C6CEE;
   --accent-purple-dark: #5B4CD6;
-  --accent-green: #B6E24D;
-  --accent-blue: #7FD1E0;
+  --accent-green: #95bb3d;
+  --accent-blue: #0caac6;
   --accent-orange: #F7B733;
   --accent-pink: #F49BC1;
 }
 
 .dark {
   --background: #14131A;
-  --foreground: #F7F3E8;
+  --foreground: #e4dcc7;
   --card-bg: #1E1B29;
 }
 
