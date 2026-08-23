@@ -1,24 +1,30 @@
-// export default function HomePage() {
-//   return (
-//     <div>
-//       <h1>GitHub Repo Analyzer</h1>
-//       <p>Paste a public GitHub repo URL to get a quality report.</p>
-//       <p>[Input bar goes here]</p>
-//       <p>[Dashboard with analysis results goes here]</p>
-//     </div>
-//   );
-// }
+"use client";
 
+import { useState, useEffect } from "react";
+import Image from "next/image";
 import InputBar from "@/components/InputBar";
 import ThemeToggle from "@/components/ThemeToggle";
 
 export default function HomePage() {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDark);
+  }, [isDark]);
+
   return (
     <div className="min-h-screen">
       <div className="flex items-center justify-between px-10 py-5 border-b-[3px] border-foreground">
-        <ThemeToggle />
+        <ThemeToggle isDark={isDark} setIsDark={setIsDark} />
         <div className="flex items-center gap-2">
-          <span className="font-heading font-bold text-lg">Git Vyuh</span>
+          <Image
+            src={isDark ? "/dark-logo.png" : "/light-logo.png"}
+            alt="Git Vyuh logo"
+            width={100}
+            height={100}
+          />
+          
+          {/* <span className="font-heading font-bold text-lg">Git Vyuh</span> */}
         </div>
       </div>
 

@@ -1,14 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-
-export default function ThemeToggle() {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", isDark);
-  }, [isDark]);
-
+export default function ThemeToggle({
+  isDark,
+  setIsDark,
+}: {
+  isDark: boolean;
+  setIsDark: (value: boolean) => void;
+}) {
   return (
     <div
       onClick={() => setIsDark(!isDark)}
