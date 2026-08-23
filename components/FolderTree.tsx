@@ -3,7 +3,9 @@ import { Folder, File } from "lucide-react";
 
 function TreeNode({ node }: { node: FolderNode }) {
   return (
-    <div className="ml-4">
+ 
+
+<div className="bg-card border-l-4 border-purple rounded-lg p-6 shadow-sm">
       <div className="flex items-center gap-2">
       <span>{node.type === "folder" ? <Folder className="w-4 h-4 text-blue-500"/> :  <File className="w-4 h-4 text-grey-500"/>}</span>
         <span>{node.name}</span>

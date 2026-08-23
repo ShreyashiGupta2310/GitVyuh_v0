@@ -4,7 +4,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 export default function CommitChart({data}:{data:CommitChartData}){
     return (
-        <div className="border rounded-lg p-6 shadow-sm">
+      <div className="bg-card border-l-4 border-blue rounded-lg p-6 shadow-sm">
           <h3 className="font-semibold text-lg mb-4">Commit Activity</h3>
           <ResponsiveContainer width="100%" height={200}>
             <LineChart data={data.commits}>

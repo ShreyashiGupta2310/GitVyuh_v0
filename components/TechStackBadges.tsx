@@ -1,16 +1,18 @@
 import { TechStackBadgesData } from "@/types";
 
 export default function TechStackBadges({ data }: { data: TechStackBadgesData }) {
-    return (
-        <div className="flex flex-wrap gap-2">
-          {data.languages.map((language) => (
-            <span
-              key={language}
-              className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium"
-            >
-              {language}
-            </span>
-          ))}
-        </div>
-      );
+  const colors = ["bg-green", "bg-blue", "bg-orange", "bg-pink", "bg-purple"];
+
+  return (
+    <div className="flex flex-wrap gap-2">
+      {data.languages.map((language, index) => (
+        <span
+          key={language}
+          className={`${colors[index % colors.length]} border-2 border-foreground rounded-lg px-2.5 py-1.5 text-xs font-bold`}
+        >
+          {language}
+        </span>
+      ))}
+    </div>
+  );
 }
