@@ -38,6 +38,7 @@ export default function InputBar() {
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           placeholder="Paste GitHub repo link, e.g. github.com/user/repo"
+          aria-label="GitHub repository URL"
           className="flex-1 text-sm px-4 py-3.5 border-2 border-foreground rounded-xl bg-card outline-none"
         />
         <button
