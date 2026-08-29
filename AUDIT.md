@@ -1,12 +1,14 @@
 # Accessibility & Performance Audit
 
+
 ## Tools used
 - **Lighthouse** (Chrome DevTools, Mobile preset) — performance and accessibility scoring
 - **WAVE** (wave.webaim.org) — detailed accessibility error/alert detection
 - Manual keyboard-only pass through the primary flow
 
 ---
-
+![Lighthouse before](docs/lighthouse-before.png)
+![Lighthouse after](docs/lighthouse-after.png)
 ## Lighthouse — Mobile
 
 | Metric | Score |
