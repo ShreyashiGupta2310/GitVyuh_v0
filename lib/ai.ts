@@ -19,7 +19,7 @@ export function buildPrompt(repoData: any) {
   
   Available components and their exact "data" shapes:
   
-  1. ScoreCard: { "score": number, "verdict": string }
+  1. ScoreCard: { "score": number (a whole number from 0 to 100), "verdict": string }
   2. ReadmeCard: { "feedback": string, "missingSections": string[] }
   3. CommitChart: { "commits": [{ "date": string, "count": number }] }
   4. FolderTree: { "root": { "name": string, "type": "file" | "folder", "children": [...] }, "organizationRating": string }
