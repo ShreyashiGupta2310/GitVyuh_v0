@@ -34,6 +34,9 @@ export function buildPrompt(repoData: any) {
   Respond with ONLY the JSON array, nothing else.
   `;
   }
+  export function cleanAIResponse(text: string): any {
+    return text.replace(/```json|```/g, "").trim();
+  }
 
   export async function analyzeRepo(repoData: any) {
     try{
@@ -43,8 +46,9 @@ export function buildPrompt(repoData: any) {
     const result = await model.generateContent(prompt);
     const text = result.response.text();
   
-    const cleaned = text.replace(/```json|```/g, "").trim();
+    // const cleaned = text.replace(/```json|```/g, "").trim();
    // const cleaned = "this is not valid json{{{";
+   const cleaned = cleanAIResponse(text);
 
     
       const parsed = JSON.parse(cleaned);
