@@ -144,6 +144,7 @@ This is the actual mechanism behind the app's "Generative UI" — the AI genuine
 - No "ideal repo" reference example alongside feedback (a natural next feature)
 - Uses a single well-engineered prompt rather than a formal AI SDK tool-calling pattern
 - Automated test coverage is still thin
+- Rate limiting is implemented in-memory and works reliably for a single server instance, but Vercel's serverless architecture may spin up multiple instances under real traffic, each with independent memory — meaning the limit isn't perfectly enforced across all requests in production. A production-grade version would use a shared store like Redis or Vercel KV.
 
 ---
 
